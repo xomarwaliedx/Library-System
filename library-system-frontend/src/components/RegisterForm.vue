@@ -1,3 +1,94 @@
 <template>
-    Register
-</template>
+    <v-sheet width="300" class="mx-auto">
+      <v-form @submit.prevent="submitForm">
+        <v-text-field
+          v-model="email"
+          label="Email"
+          :rules="emailRules"
+        ></v-text-field>
+  
+        <v-text-field
+          v-model="phone"
+          label="Phone"
+          :rules="phoneRules"
+        ></v-text-field>
+  
+        <v-text-field
+          v-model="fullName"
+          label="Full Name"
+          :rules="nameRules"
+        ></v-text-field>
+  
+        <v-text-field
+          v-model="password"
+          label="Password"
+          :rules="passwordRules"
+          type="password"
+        ></v-text-field>
+  
+        <v-btn type="submit" block class="mt-2">Submit</v-btn>
+  
+        <!-- Display error message to the user -->
+        <v-alert
+          v-if="errorMessage"
+          type="error"
+          dismissible
+          @input="errorMessage = null"
+        >
+          {{ errorMessage }}
+        </v-alert>
+      </v-form>
+    </v-sheet>
+  </template>
+  
+  <script>
+  import axios from 'axios';
+  
+  export default {
+    data: () => ({
+      email: '',
+      emailRules: [
+        value => /.+@.+\..+/.test(value) || 'E-mail must be valid',
+      ],
+      phone: '',
+      phoneRules: [
+        value => /^[0-9]{10}$/.test(value) || 'Phone must be a valid 10-digit number',
+      ],
+      fullName: '',
+      nameRules: [
+        value => !!value || 'Name is required',
+      ],
+      password: '',
+      passwordRules: [
+        value => value.length >= 6 || 'Password must be at least 6 characters.',
+      ],
+      errorMessage: null, // New property to store error message
+    }),
+    methods: {
+      async submitForm() {
+        try {
+          const response = await axios.post('http://localhost:8080/api/user/users/register', {
+            email: this.email,
+            phone: this.phone,
+            fullName: this.fullName,
+            password: this.password,
+            isAdmin: false,
+          });
+  
+          // Handle the response as needed (e.g., show success message)
+          console.log(response.data);
+
+          // Redirect to /login after a successful registration
+          this.$router.push('/login'); 
+        } catch (error) {
+          // Handle errors (e.g., show error message)
+          console.error('Error submitting form:', error);
+  
+          // Update the errorMessage property to display to the user
+          this.errorMessage = error.response ? error.response.data : 'An unexpected error occurred';
+        }
+      }
+    }
+  }
+  </script>
+  
