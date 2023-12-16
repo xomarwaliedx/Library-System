@@ -1,10 +1,10 @@
 <template>
- 
   <v-app>
-    <v-app-bar app color="primary" >
+    <v-app-bar app color="primary">
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-      <v-toolbar-title>Library System</v-toolbar-title>
-      <!-- <v-spacer></v-spacer> -->
+      <!-- <v-toolbar-title>Library System</v-toolbar-title> -->
+      <span class="headline  mx-auto">Library System</span>
+      <v-spacer></v-spacer>
       <v-btn text>Home</v-btn>
       <v-btn text>About</v-btn>
       <v-btn text>Contact</v-btn>
@@ -25,24 +25,23 @@
     </v-navigation-drawer>
 
     <v-content>
-        <div id="app">
-    <!-- Other app content here -->
-    <router-view></router-view>
-  </div>
+      <div id="app">
+        <!-- Other app content here -->
+        <router-view></router-view>
+      </div>
     </v-content>
   </v-app>
-
 </template>
 
 <script>
 //import LoginForm from './components/user/MyBooks.vue'
 
 export default {
-  name: 'App',
+  name: "App",
   // components: {
   //   LoginForm
   // }
-}
+};
 </script>
 
 <style>
@@ -55,9 +54,9 @@ export default {
   margin-top: 60px;
 }
 
-.v-application.v-application--is-rtl .v-application__wrap,
-.v-application.v-application--is-ltr .v-application__wrap {
-  min-height: 0 !important;
+.headline {
+  font-size: 32px;
+  font-weight: bold; 
+  margin-right: 48px;
 }
-
 </style>
