@@ -2,11 +2,19 @@
   <v-app>
     <v-app-bar app color="primary">
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-      <span class="headline  mx-auto">Library System</span>
+      <span class="headline mx-auto">Library System</span>
       <v-spacer></v-spacer>
-      <v-btn text>Home</v-btn>
-      <v-btn text>About</v-btn>
-      <v-btn text>Logout</v-btn>
+      <router-link to="/admin">
+        <v-btn text class="white-text">Home</v-btn>
+      </router-link>
+
+<router-link to="/aboutlibrary">
+        <v-btn text class="white-text">About</v-btn>
+      </router-link>
+
+      <router-link to="/login">
+        <v-btn text class="white-text">Logout</v-btn>
+      </router-link>
     </v-app-bar>
 
     <v-navigation-drawer v-model="drawer" app>
@@ -22,7 +30,7 @@
       </v-list>
     </v-navigation-drawer>
 
-    <v-content>
+    <v-content class="zeroHeight">
       <div id="app">
         <!-- Other app content here -->
         <router-view></router-view>
@@ -49,12 +57,23 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  margin-top: 32px;
 }
-
+.custom-bg {
+  background-image: url("@/assets/HomeWallpaper.jpg"); /* Path to your image */
+  background-size: cover;
+  background-position: center center;
+  height: 100vh;
+}
 .headline {
   font-size: 32px;
-  font-weight: bold; 
+  font-weight: bold;
   margin-right: 48px;
+}
+.zeroHeight {
+  height: 0px;
+}
+.white-text {
+  color: white !important; /* Ensure text color remains white */
 }
 </style>
