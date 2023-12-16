@@ -4,6 +4,9 @@ import Login from './components/LoginForm'
 import Register from './components/RegisterForm'
 import MyBooks from './components/user/MyBooks'
 import BrowseBooks from './components/user/BrowseBooks'
+import RegisterByAdmin from './components/admin/RegisterUser'
+import AddBook from './components/admin/AddBook'
+import BorrowedBooks from './components/admin/BorrowedBooks'
 
 const routes = [
     {
@@ -25,6 +28,24 @@ const routes = [
         path: '/user/browsebooks',
         name: 'browse',
         component: BrowseBooks
+    }
+    ,
+    {
+        path: '/admin/registeruser',
+        name: '/admin/registeruser',
+        component: RegisterByAdmin
+    }
+    ,
+    {
+        path: '/admin/addbook',
+        name: 'addbook',
+        component: AddBook
+    }
+    ,
+    {
+        path: '/admin/borrowedbooks',
+        name: 'borrowedbooks',
+        component: BorrowedBooks
     }
 ]
 
