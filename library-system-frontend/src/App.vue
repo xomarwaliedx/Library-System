@@ -2,13 +2,11 @@
   <v-app>
     <v-app-bar app color="primary">
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-      <!-- <v-toolbar-title>Library System</v-toolbar-title> -->
       <span class="headline  mx-auto">Library System</span>
       <v-spacer></v-spacer>
       <v-btn text>Home</v-btn>
       <v-btn text>About</v-btn>
-      <v-btn text>Contact</v-btn>
-      <!-- Add more buttons or links as needed -->
+      <v-btn text>Logout</v-btn>
     </v-app-bar>
 
     <v-navigation-drawer v-model="drawer" app>
