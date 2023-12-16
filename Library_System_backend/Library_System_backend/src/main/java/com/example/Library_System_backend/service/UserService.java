@@ -19,16 +19,17 @@ public class UserService {
 
 
   @Transactional
-  public UserDTO test() {
+  public List<UserDTO> test() {
     User user = new User("email", "1234", "fullName", "password",true);
-    userRepository.save(user);
+    User found=userRepository.findByEmail("email");
+    if (found!=null){
+        System.err.println("User already exists");
+    } else {
+      userRepository.save(user);
+    }
+
     List<User> output=userRepository.findAll();
     System.err.println("Hello World");
-    User output1 = output.get(0);
-    UserDTO outputDTO = mapper.userToUserDTO(output1);
-    return outputDTO;
+    return mapper.userListToUserDTOList(output);
   }
-
-
-
 }

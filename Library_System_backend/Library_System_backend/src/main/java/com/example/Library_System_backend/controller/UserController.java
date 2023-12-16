@@ -13,15 +13,15 @@ import java.util.List;
 
 @RequestMapping("/api/user/users")
 @RestController
-
 public class UserController {
 
   @Autowired
   private UserService userService;
 
   @GetMapping("")
-  public ResponseEntity<UserDTO> testUsers() {
-    return ResponseEntity.ok(userService.test());
+  public ResponseEntity<List<UserDTO>> testUsers() {
+    List<UserDTO> userDTO = userService.test();
+    return ResponseEntity.ok(userDTO);
   }
 
 }

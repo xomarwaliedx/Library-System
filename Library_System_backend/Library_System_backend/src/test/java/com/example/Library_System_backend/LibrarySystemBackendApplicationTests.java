@@ -15,6 +15,9 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.ResponseEntity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.mockito.Mockito.*;
 
 @SpringBootTest
@@ -36,10 +39,12 @@ class LibrarySystemBackendApplicationTests {
 
 	@Test
 	public void testTestUsers() {
-		UserDTO expectedUserDTO = new UserDTO("email", "1234", "fullName", "password",true);
+		List<UserDTO> expectedUserDTO = new ArrayList<>(); // Initializing an ArrayList
+		expectedUserDTO.add(new UserDTO("email", "1234", "fullName", "password", true));
+
 		when(userService.test()).thenReturn(expectedUserDTO);
 
-		ResponseEntity<UserDTO> responseEntity = userController.testUsers();
+		ResponseEntity<List<UserDTO>> responseEntity = userController.testUsers();
 
 		assertEquals(expectedUserDTO, responseEntity.getBody());
 		assertEquals(200, responseEntity.getStatusCodeValue());
