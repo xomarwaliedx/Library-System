@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <h1>Book Information</h1>
+    <h1>Add Book</h1>
     <v-form @submit.prevent="submitForm">
       <v-row>
         <v-col cols="12" sm="6">
@@ -39,6 +39,8 @@
             label="Publication Year"
             type="number"
             required
+            placeholder="2010"
+            :rules="[yearValidation]"
           ></v-text-field>
         </v-col>
         <v-col cols="12" sm="6">
@@ -74,11 +76,23 @@ export default {
         "Mystery",
         "Science Fiction",
         "Fantasy",
+        "Romance",
+        "Thriller",
+        "Horror",
+        "Others",
       ],
-      languages: ["English", "Spanish", "French", "German", "Other"],
+      languages: ["English","Arabic", "Spanish", "French", "German", "Other"],
     };
   },
   methods: {
+    yearValidation(value) {
+      const currentYear = new Date().getFullYear();
+      const minYear = 1800;
+      if (value >= minYear && value <= currentYear) {
+        return true;
+      }
+      return "Year must be between 1800 and " + currentYear;
+    },
     submitForm() {
       console.log("Form submitted!", this.formData);
       // Send form data using Axios
