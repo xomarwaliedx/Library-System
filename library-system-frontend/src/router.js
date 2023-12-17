@@ -39,8 +39,8 @@ const routes = [
     }
     ,
     {
-        path: '/admin/registeruser',
-        name: '/admin/registeruser',
+        path: '/admin/reguser',
+        name: '/admin/reguser',
         component: RegisterByAdmin
     }
     ,

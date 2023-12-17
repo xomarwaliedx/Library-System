@@ -12,20 +12,41 @@
         <v-btn text class="white-text">Login</v-btn>
       </router-link>
 
-      <router-link to="/admin" v-if="!($route.path.includes('/register') || $route.path.includes('/login') || $route.path.includes('/aboutlibrary'))">
+      <router-link
+        to="/admin"
+        v-if="
+          !(
+            $route.path.includes('/register') ||
+            $route.path.includes('/login') ||
+            $route.path.includes('/aboutlibrary')
+          )
+        "
+      >
         <v-btn text class="white-text">Home</v-btn>
       </router-link>
 
-      <router-link to="/aboutlibrary" v-if="!$route.path.includes('/aboutlibrary')">
+      <router-link
+        to="/aboutlibrary"
+        v-if="!$route.path.includes('/aboutlibrary')"
+      >
         <v-btn text class="white-text">About</v-btn>
       </router-link>
 
-      <v-btn text class="white-text" @click="goBack" v-if="$route.path.includes('/aboutlibrary')">
-        Back
-      </v-btn>
-      
+      <v-btn
+        @click="logoutUser"
+        text
+        class="white-text"
+        v-if="
+          !(
+            $route.path.includes('/register') ||
+            $route.path.includes('/login') ||
+            $route.path.includes('/aboutlibrary')
+          )
+        "
+        >Logout</v-btn
+      >
 
-      <v-btn @click="logoutUser" text class="white-text" v-if="!($route.path.includes('/register') || $route.path.includes('/login') || $route.path.includes('/aboutlibrary'))">Logout</v-btn>
+      <v-btn text class="white-text" @click="goBack"> Back </v-btn>
     </v-app-bar>
 
     <v-navigation-drawer v-model="drawer" app>
@@ -64,7 +85,7 @@ export default {
       this.$router.go(-1);
     },
   },
-  
+
   // components: {
   //   LoginForm
   // }

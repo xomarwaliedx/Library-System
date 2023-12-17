@@ -67,7 +67,7 @@
     methods: {
       async submitForm() {
         try {
-          const response = await axios.post('http://localhost:8080/api/user/users/register', {
+          const response = await axios.post('http://localhost:8080/api/register', {
             email: this.email,
             phone: this.phone,
             fullName: this.fullName,
