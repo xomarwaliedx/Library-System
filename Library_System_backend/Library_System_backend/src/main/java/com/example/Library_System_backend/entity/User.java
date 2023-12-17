@@ -10,6 +10,7 @@ import lombok.*;
 @AllArgsConstructor
 @Getter
 @Setter
+@ToString
 @Table(name = "user", uniqueConstraints = @UniqueConstraint(columnNames = {"email", "phone"}))
 public class User extends HasLongId {
 
@@ -26,5 +27,5 @@ public class User extends HasLongId {
   private String password;
 
   @Column(name = "is_admin", nullable = false)
-  private boolean isAdmin;
+  private Boolean isAdmin;
 }

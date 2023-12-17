@@ -3,9 +3,11 @@ package com.example.Library_System_backend.dto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
+@ToString
 @AllArgsConstructor
 public class UserDTO extends HasLongIdDTO {
   private String email;
@@ -16,6 +18,6 @@ public class UserDTO extends HasLongIdDTO {
 
   private String password;
 
-  private boolean isAdmin;
+  private Boolean isAdmin;
 
 }
