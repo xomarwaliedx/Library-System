@@ -40,6 +40,20 @@ public class UserController {
       return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
               .body("Unexpected error during user registration: " + e.getMessage());
     }
+  }
 
+  @PostMapping("/login")
+  public ResponseEntity<Object> loginUser(@RequestBody UserDTO userDTO) {
+    try {
+      UserDTO loggedInUser = userService.login(userDTO.getEmail(), userDTO.getPassword(), userDTO.isAdmin());
+      return ResponseEntity.ok(loggedInUser);
+    } catch (IllegalArgumentException e) {
+      LOGGER.warn("Bad request during user login: {}", e.getMessage());
+      return ResponseEntity.badRequest().body(e.getMessage());
+    } catch (Exception e) {
+      LOGGER.error("Unexpected error during user login", e);
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+              .body("Unexpected error during user login: " + e.getMessage());
+    }
   }
 }

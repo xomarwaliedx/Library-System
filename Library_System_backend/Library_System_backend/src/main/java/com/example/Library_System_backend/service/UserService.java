@@ -45,8 +45,17 @@ public class UserService {
   }
 
   private boolean isValidEmailFormat(String email) {
-    // Implement your email format validation logic
-    // For a simple example, we check if the email contains '@'
     return email != null && email.contains("@");
+  }
+  
+  @Transactional
+  public UserDTO login(String email, String password, Boolean isAdmin) {
+    // Find the user by email and password
+    User user = userRepository.findByEmailAndPassword(email, password);
+    if (user == null || (isAdmin!=user.isAdmin())) {
+      throw new IllegalArgumentException("Invalid data");
+    }
+
+    return mapper.userToUserDTO(user);
   }
 }
