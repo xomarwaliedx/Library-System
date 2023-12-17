@@ -71,7 +71,7 @@ router.beforeEach(async (to, from, next) => {
         resolve(!!userId); // Resolve with a boolean indicating whether userId exists
     });
 
-    if (!isAuthenticated && (to.name !== 'login' && to.name !== 'register')) {
+    if (!isAuthenticated && (to.name !== 'login' && to.name !== 'register'  && to.name !== 'aboutlibrary')) {
         next('/login');
     } else {
         next();
