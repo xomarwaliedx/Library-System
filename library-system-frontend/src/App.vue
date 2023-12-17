@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <v-app-bar app color="primary">
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+      <!-- <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon> -->
       <span class="headline mx-auto">Library System</span>
       <v-spacer></v-spacer>
       <router-link v-if="$route.path.includes('/login')" to="/register">
@@ -87,6 +87,7 @@ export default {
   height: 100vh;
 }
 .headline {
+  padding: 0 0 0 5%;
   font-size: 32px;
   font-weight: bold;
   margin-right: 48px;
