@@ -7,6 +7,9 @@ import BrowseBooks from './components/user/BrowseBooks'
 import RegisterByAdmin from './components/admin/RegisterUser'
 import AddBook from './components/admin/AddBook'
 import BorrowedBooks from './components/admin/BorrowedBooks'
+import AdminHomePage from './components/admin/AdminHomePage'
+import AboutLibrary from './components/AboutLibrary'
+
 
 const routes = [
     {
@@ -18,6 +21,11 @@ const routes = [
         path: '/register',
         name: 'register',
         component: Register
+    },
+    {
+        path: '/aboutlibrary',
+        name: 'aboutlibrary',
+        component: AboutLibrary
     },
     {
         path: '/user/mybooks',
@@ -46,7 +54,13 @@ const routes = [
         path: '/admin/borrowedbooks',
         name: 'borrowedbooks',
         component: BorrowedBooks
+    },
+    {
+        path: '/admin',
+        name: 'admin',
+        component: AdminHomePage
     }
+    
 ]
 
 const router = createRouter({ history: createWebHistory(), routes })
