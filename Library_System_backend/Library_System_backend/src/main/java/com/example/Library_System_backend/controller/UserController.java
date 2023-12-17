@@ -48,12 +48,19 @@ public class UserController {
       UserDTO loggedInUser = userService.login(userDTO.getEmail(), userDTO.getPassword(), userDTO.isAdmin());
       return ResponseEntity.ok(loggedInUser);
     } catch (IllegalArgumentException e) {
-      LOGGER.warn("Bad request during user login: {}", e.getMessage());
-      return ResponseEntity.badRequest().body(e.getMessage());
+      // Check if the exception message indicates invalid credentials
+      if ("Invalid credentials".equals(e.getMessage())) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid email or password");
+      } else {
+        // Handle other bad requests
+        LOGGER.warn("Bad request during user login: {}", e.getMessage());
+        return ResponseEntity.badRequest().body(e.getMessage());
+      }
     } catch (Exception e) {
       LOGGER.error("Unexpected error during user login", e);
       return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
               .body("Unexpected error during user login: " + e.getMessage());
     }
   }
+
 }

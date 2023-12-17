@@ -28,7 +28,7 @@ const routes = [
         component: AboutLibrary
     },
     {
-        path: '/user/mybooks',
+        path: '/user/mybooks/:userId',
         name: 'mybooks',
         component: MyBooks
     },
