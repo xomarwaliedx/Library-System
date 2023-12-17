@@ -52,7 +52,7 @@
       ],
       phone: '',
       phoneRules: [
-        value => /^[0-9]{10}$/.test(value) || 'Phone must be a valid 10-digit number',
+        value => /^(\+?[0-9]){6,}$/.test(value) || 'Phone must have more than 5 digits',
       ],
       fullName: '',
       nameRules: [

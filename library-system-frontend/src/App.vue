@@ -4,17 +4,23 @@
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       <span class="headline mx-auto">Library System</span>
       <v-spacer></v-spacer>
-      <router-link to="/admin">
+      <router-link v-if="$route.path.includes('/login')" to="/register">
+        <v-btn text class="white-text">Register</v-btn>
+      </router-link>
+
+      <router-link v-if="$route.path.includes('/register')" to="/login">
+        <v-btn text class="white-text">Login</v-btn>
+      </router-link>
+
+      <router-link to="/admin" v-if="!($route.path.includes('/register') || $route.path.includes('/login'))">
         <v-btn text class="white-text">Home</v-btn>
       </router-link>
 
-<router-link to="/aboutlibrary">
+      <router-link to="/aboutlibrary" v-if="!($route.path.includes('/register') || $route.path.includes('/login'))">
         <v-btn text class="white-text">About</v-btn>
       </router-link>
 
-      <router-link to="/login">
-        <v-btn text class="white-text">Logout</v-btn>
-      </router-link>
+      <v-btn @click="logoutUser" text class="white-text" v-if="!($route.path.includes('/register') || $route.path.includes('/login'))">Logout</v-btn>
     </v-app-bar>
 
     <v-navigation-drawer v-model="drawer" app>
@@ -44,6 +50,13 @@
 
 export default {
   name: "App",
+  methods: {
+    logoutUser() {
+      localStorage.setItem("userId", null);
+
+      this.$router.push("/login");
+    },
+  },
   // components: {
   //   LoginForm
   // }
