@@ -61,12 +61,17 @@ export default {
         localStorage.setItem("userId", response.data.id);
 
         this.loginError = null;
-
-        // Instead of passing user in query, pass it as params
-        this.$router.push({
-          name: "mybooks",
-          // params: { userId: response.data.id }, // Assuming the user object has an 'id' property
-        });
+        console.log("response.data", response.data);
+        console.log('response.data.isAdmin', response.data.isAdmin);
+        if (response.data.isAdmin) {
+          this.$router.push({
+            name: "admin",
+          });
+        } else {
+          this.$router.push({
+            name: "mybooks",
+          });
+        }
       } catch (error) {
         this.loginError = error.response
           ? error.response.data

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @CrossOrigin
-@RequestMapping("/api/user/users")
+@RequestMapping("/api")
 @RestController
 public class UserController {
 
@@ -21,7 +21,7 @@ public class UserController {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
 
-  @GetMapping("")
+  @GetMapping("/user/users")
   public ResponseEntity<List<UserDTO>> testUsers() {
     List<UserDTO> userDTO = userService.test();
     return ResponseEntity.ok(userDTO);
@@ -42,10 +42,10 @@ public class UserController {
     }
   }
 
-  @PostMapping("/login")
+  @PostMapping("/user/users/login")
   public ResponseEntity<Object> loginUser(@RequestBody UserDTO userDTO) {
     try {
-      UserDTO loggedInUser = userService.login(userDTO.getEmail(), userDTO.getPassword(), userDTO.isAdmin());
+      UserDTO loggedInUser = userService.login(userDTO.getEmail(), userDTO.getPassword(), userDTO.getIsAdmin());
       return ResponseEntity.ok(loggedInUser);
     } catch (IllegalArgumentException e) {
       // Check if the exception message indicates invalid credentials

@@ -4,6 +4,7 @@ import com.example.Library_System_backend.dto.BookDTO;
 import com.example.Library_System_backend.dto.UserDTO;
 import com.example.Library_System_backend.entity.Book;
 import com.example.Library_System_backend.entity.User;
+import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
 import org.springframework.stereotype.Service;
 

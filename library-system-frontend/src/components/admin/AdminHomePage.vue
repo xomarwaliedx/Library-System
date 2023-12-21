@@ -40,7 +40,7 @@ export default {
       buttons: [
         { text: "Add Book", path: "/admin/addbook" },
         { text: "Borrowed Books", path: "/admin/borrowedbooks" },
-        { text: "Register User", path: "/admin/registeruser" },
+        { text: "Register User", path: "/admin/reguser" },
       ],
     };
   },

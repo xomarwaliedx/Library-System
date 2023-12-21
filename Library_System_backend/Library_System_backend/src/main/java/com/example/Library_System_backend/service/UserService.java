@@ -27,6 +27,7 @@ public class UserService {
 
   @Transactional
   public UserDTO registerNewUser(UserDTO userDTO) {
+    System.err.println(userDTO.toString());
     // Validate email format
     if (!isValidEmailFormat(userDTO.getEmail())) {
       throw new IllegalArgumentException("Invalid email format");
@@ -39,6 +40,7 @@ public class UserService {
 
     // Save the new user
     User user = mapper.userDTOToUser(userDTO);
+    System.err.println(user.toString());
     userRepository.save(user);
 
     return mapper.userToUserDTO(user);
@@ -52,7 +54,7 @@ public class UserService {
   public UserDTO login(String email, String password, Boolean isAdmin) {
     // Find the user by email and password
     User user = userRepository.findByEmailAndPassword(email, password);
-    if (user == null || (isAdmin!=user.isAdmin())) {
+    if (user == null || (isAdmin!=user.getIsAdmin())) {
       throw new IllegalArgumentException("Invalid data");
     }
 
