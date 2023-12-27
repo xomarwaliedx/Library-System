@@ -117,6 +117,7 @@ class UserServiceTest {
     void testValidLogin() {
         // Mocking repository to return a user
         User mockUser = new User();
+        mockUser.setIsAdmin(false); // or set it to true if the user is an admin
         when(userRepository.findByEmailAndPassword(anyString(), anyString())).thenReturn(mockUser);
 
         // Mocking mapper to return a UserDTO

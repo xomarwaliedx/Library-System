@@ -37,10 +37,9 @@ class BorrowServiceTest {
     }
 
     @Test
-    void getBooksBorrowedByUser() {
-        Long userId = 101L;
+    void getAllBorrowedBooks() {
         User user1 = new User();
-        user1.setId(userId);
+        user1.setId(101L);
         user1.setEmail("user1@example.com");
         user1.setPhone("123456789");
         user1.setFullName("John Doe");
@@ -79,7 +78,6 @@ class BorrowServiceTest {
         borrow2.setUser(user1);
         borrow2.setBook(book2);
 
-        // Borrow by another user
         User user2 = new User();
         user2.setId(102L);
         user2.setEmail("user2@example.com");
@@ -101,40 +99,50 @@ class BorrowServiceTest {
         borrow3.setId(3);
         borrow3.setBorrowDate(LocalDate.now());
         borrow3.setDuration(10);
-        borrow3.setUser(user2); // This borrow is for a different user
+        borrow3.setUser(user2);
         borrow3.setBook(book3);
 
-        List<Borrow> borrowedBooksByUser = Arrays.asList(borrow1, borrow2);
+        List<Borrow> borrowedBooks = Arrays.asList(borrow1, borrow2, borrow3);
 
-        when(borrowRepository.findByUser_Id(userId)).thenReturn(borrowedBooksByUser);
+        when(borrowRepository.findAll()).thenReturn(borrowedBooks);
 
         BorrowDTO borrowDTO1 = new BorrowDTO();
         borrowDTO1.setId(1);
         borrowDTO1.setBorrowDate(LocalDate.now());
         borrowDTO1.setDuration(14);
-        borrowDTO1.setUserId(userId);
+        borrowDTO1.setUserId(101L);
         borrowDTO1.setBookId(201L);
 
         BorrowDTO borrowDTO2 = new BorrowDTO();
         borrowDTO2.setId(2);
         borrowDTO2.setBorrowDate(LocalDate.now());
         borrowDTO2.setDuration(21);
-        borrowDTO2.setUserId(userId);
+        borrowDTO2.setUserId(101L);
         borrowDTO2.setBookId(202L);
 
-        List<BorrowDTO> expectedDTOs = Arrays.asList(borrowDTO1, borrowDTO2);
+        BorrowDTO borrowDTO3 = new BorrowDTO();
+        borrowDTO3.setId(3);
+        borrowDTO3.setBorrowDate(LocalDate.now());
+        borrowDTO3.setDuration(10);
+        borrowDTO3.setUserId(102L);
+        borrowDTO3.setBookId(203L);
+
+        List<BorrowDTO> expectedDTOs = Arrays.asList(borrowDTO1, borrowDTO2, borrowDTO3);
 
         when(mapper.borrowToBorrowDTO(borrow1)).thenReturn(borrowDTO1);
         when(mapper.borrowToBorrowDTO(borrow2)).thenReturn(borrowDTO2);
+        when(mapper.borrowToBorrowDTO(borrow3)).thenReturn(borrowDTO3);
 
         // Test
-        List<BorrowDTO> result = borrowService.getBooksBorrowedByUser(userId);
+        List<BorrowDTO> result = borrowService.getAllBorrowedBooks();
 
         // Verify
         assertEquals(expectedDTOs, result);
-        verify(borrowRepository, times(1)).findByUser_Id(userId);
-        verify(mapper, times(borrowedBooksByUser.size())).borrowToBorrowDTO(any());
+        verify(borrowRepository, times(1)).findAll();
+        verify(mapper, times(borrowedBooks.size())).borrowToBorrowDTO(any());
     }
+
+
 
 }
 

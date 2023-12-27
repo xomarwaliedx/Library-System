@@ -12,4 +12,5 @@ import lombok.Setter;
 public abstract class HasIntIdDTO {
 
   protected Integer id;
+
 }
