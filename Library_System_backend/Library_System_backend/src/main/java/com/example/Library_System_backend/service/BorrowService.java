@@ -27,6 +27,13 @@ public class BorrowService {
 
     @Autowired
     UserService userService;
+
+    public List<BorrowDTO> getAllBorrowedBooks() {
+        List<Borrow> borrowedBooks = borrowRepository.findAll();
+        return borrowedBooks.stream()
+                .map(mapper::borrowToBorrowDTO)
+                .collect(Collectors.toList());
+    }
     
     public List<BorrowDTO> getBooksBorrowedByUser(Long userId) {
         List<Borrow> borrowedBooksByUser = borrowRepository.findByUser_Id(userId);
