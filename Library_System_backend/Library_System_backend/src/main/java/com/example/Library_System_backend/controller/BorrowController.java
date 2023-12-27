@@ -20,6 +20,22 @@ public class BorrowController {
     @Autowired
     private BorrowService borrowService;
 
+    @PostMapping("/user/borrowBook")
+    public ResponseEntity<Boolean> borrowBook(@RequestBody BorrowDTO borrowDTO) {
+        boolean result = borrowService.borrowBook(borrowDTO);
+
+        if (result) {
+            return ResponseEntity.ok(true);
+        } else {
+            return ResponseEntity.ok(false);
+        }
+    }
+
+    @GetMapping("/borrowedBooks")
+    public ResponseEntity<List<BorrowDTO>> getAllBorrowedBooks() {
+        List<BorrowDTO> borrowedBooks = borrowService.getAllBorrowedBooks();
+        return ResponseEntity.ok(borrowedBooks);
+    }
 
     @GetMapping("/user/borrowedBooks/{userId}")
     public ResponseEntity<List<BorrowDTO>> getBooksBorrowedByUser(@PathVariable Long userId) {

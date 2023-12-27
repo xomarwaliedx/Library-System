@@ -27,6 +27,13 @@ public class BorrowService {
 
     @Autowired
     UserService userService;
+
+    public List<BorrowDTO> getAllBorrowedBooks() {
+        List<Borrow> borrowedBooks = borrowRepository.findAll();
+        return borrowedBooks.stream()
+                .map(mapper::borrowToBorrowDTO)
+                .collect(Collectors.toList());
+    }
     
     public List<BorrowDTO> getBooksBorrowedByUser(Long userId) {
         List<Borrow> borrowedBooksByUser = borrowRepository.findByUser_Id(userId);
@@ -35,4 +42,30 @@ public class BorrowService {
                 .collect(Collectors.toList());
     }
 
+    public boolean borrowBook(BorrowDTO borrowDTO) {
+        // Map the BorrowDTO to Borrow entity
+        Borrow borrow = mapper.borrowDTOToBorrow(borrowDTO);
+        // Set the borrowDate to the current date
+        borrow.setBorrowDate(LocalDate.now());
+        // Retrieve the book from the database
+        Book book = bookRepository.findById(borrowDTO.getBookId()).orElse(null);
+
+        // Check if the book exists and its count is greater than 0
+        if (book != null && book.getCount() > 0) {
+            // Decrement the count in the book table
+            book.setCount(book.getCount() - 1);
+            bookRepository.save(book);
+
+            // Save the Borrow record
+            borrowRepository.save(borrow);
+
+            // Notify the user
+            System.out.println("Book is reserved to you. Head to the library to pick it up.");
+            return true;
+        } else {
+            // Book is not available
+            System.out.println("Book not available now.");
+            return false;
+        }
+    }
 }
