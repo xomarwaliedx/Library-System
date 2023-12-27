@@ -7,7 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -28,8 +27,8 @@ public class Book extends HasLongId {
   private String language;
 
   @Column(name = "publicationYear", nullable = false)
-  private int publicationYear;
+  private Integer publicationYear;
 
   @Column(name = "count", nullable = false)
-  private int count;
+  private Integer count;
 }

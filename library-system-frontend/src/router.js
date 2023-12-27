@@ -34,7 +34,7 @@ const routes = [
     },
     {
         path: '/user/browsebooks',
-        name: 'browse',
+        name: 'browsebooks',
         component: BrowseBooks
     }
     ,
