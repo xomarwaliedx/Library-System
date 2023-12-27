@@ -33,7 +33,6 @@ public class BorrowService {
                 .map(mapper::borrowToBorrowDTO)
                 .collect(Collectors.toList());
     }
-
     public List<BorrowDTO> getBooksBorrowedByUser(Long userId) {
         List<Borrow> borrowedBooksByUser = borrowRepository.findByUser_Id(userId);
         return borrowedBooksByUser.stream()
