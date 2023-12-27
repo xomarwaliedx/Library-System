@@ -31,6 +31,13 @@ public class BorrowController {
         }
     }
 
+
+    @PostMapping("/user/returnBook")
+    public ResponseEntity<Boolean> returnBook(@RequestBody BorrowDTO borrowDTO) {
+        boolean isComplete=borrowService.returnBook(borrowDTO);
+        return ResponseEntity.ok(isComplete);
+    }
+
     @GetMapping("/borrowedBooks")
     public ResponseEntity<List<BorrowDTO>> getAllBorrowedBooks() {
         List<BorrowDTO> borrowedBooks = borrowService.getAllBorrowedBooks();

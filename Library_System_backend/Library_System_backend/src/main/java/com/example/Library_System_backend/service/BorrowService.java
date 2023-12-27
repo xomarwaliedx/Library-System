@@ -27,14 +27,12 @@ public class BorrowService {
 
     @Autowired
     UserService userService;
-
     public List<BorrowDTO> getAllBorrowedBooks() {
         List<Borrow> borrowedBooks = borrowRepository.findAll();
         return borrowedBooks.stream()
                 .map(mapper::borrowToBorrowDTO)
                 .collect(Collectors.toList());
     }
-    
     public List<BorrowDTO> getBooksBorrowedByUser(Long userId) {
         List<Borrow> borrowedBooksByUser = borrowRepository.findByUser_Id(userId);
         return borrowedBooksByUser.stream()
@@ -65,6 +63,44 @@ public class BorrowService {
         } else {
             // Book is not available
             System.out.println("Book not available now.");
+            return false;
+        }
+    }
+
+    public boolean returnBook(BorrowDTO borrowDTO) {
+        Integer id=borrowDTO.getId();
+        Optional<Borrow> optionalBorrow = borrowRepository.findById(id);
+
+        if (optionalBorrow.isPresent()) {
+            Borrow borrow = optionalBorrow.get();
+
+            // Calculate return date and penalty
+            LocalDate borrowDate = borrow.getBorrowDate();
+            int duration = borrow.getDuration();
+            LocalDate returnDate = borrowDate.plusDays(duration);
+            LocalDate currentDate = LocalDate.now();
+
+            long lateDays = currentDate.isAfter(returnDate) ? currentDate.toEpochDay() - returnDate.toEpochDay() : 0;
+            double penalty = lateDays * 10; // $10 penalty per late day
+
+            // Display or use the penalty as needed
+            System.out.println("Return Date: " + returnDate);
+            System.out.println("Current Date: " + currentDate);
+            System.out.println("Penalty: $" + penalty);
+
+            // Delete the Borrow record
+            borrowRepository.deleteByIdIn(id);
+            // Increment the count field in the associated book
+            Book associatedBook = borrow.getBook();
+            if (associatedBook != null) {
+                associatedBook.setCount(associatedBook.getCount() + 1);
+                bookRepository.save(associatedBook);
+            }
+
+            return true;
+        } else {
+            // Handle the case where the Borrow record with the given ID is not found
+            System.out.println("Borrow record not found with ID: " + id);
             return false;
         }
     }
