@@ -2,8 +2,6 @@ package com.example.Library_System_backend.dto;
 
 import lombok.*;
 
-import java.time.LocalDate;
-
 @Getter
 @Setter
 @AllArgsConstructor
@@ -11,7 +9,7 @@ import java.time.LocalDate;
 @ToString
 public class BorrowDTO extends HasIntIdDTO{
 
-        private LocalDate borrowDate;
+        private Long borrowDate;
 
         private Integer duration;
 

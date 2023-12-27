@@ -11,17 +11,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.Optional;
 
 public interface BorrowRepository extends JpaRepository<Borrow, Long> {
 
-    List<Borrow> findByUser_Id(Long userId);
-
-    List<Borrow> findByUser_IdAndBook_Id(Long userId, Long BookId);
-
-    List<Borrow> findAll();
-    
-    Optional<Borrow> findById(Integer id);
+    List<Borrow> findByUser_IdAndBook_Id(Long id, Long id1);
 
     @Transactional
     @Modifying
