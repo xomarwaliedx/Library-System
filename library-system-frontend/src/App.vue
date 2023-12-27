@@ -15,10 +15,8 @@
       <router-link
         to="/admin"
         v-if="
-          !(
-            $route.path.includes('/register') ||
-            $route.path.includes('/login') ||
-            $route.path.includes('/aboutlibrary')
+          (
+            $route.path.includes('/admin')
           )
         "
       >

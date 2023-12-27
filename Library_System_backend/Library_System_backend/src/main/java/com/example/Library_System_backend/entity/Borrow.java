@@ -3,6 +3,7 @@ package com.example.Library_System_backend.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Entity
 @RequiredArgsConstructor
@@ -13,7 +14,7 @@ import javax.persistence.*;
 public class Borrow extends HasIntId {
 
     @Column(name = "borrow_date", nullable = false)
-    private Long borrowDate;
+    private LocalDate borrowDate;
 
     @Column(name = "duration", nullable = false)
     private Integer duration;
@@ -25,4 +26,21 @@ public class Borrow extends HasIntId {
     @ManyToOne(optional = false)
     @JoinColumn(name = "book_id")
     private Book book;
+
+    public void setBorrowDate(LocalDate borrowDate) {
+        this.borrowDate = borrowDate;
+    }
+
+    public void setDuration(Integer duration) {
+        this.duration = duration;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public void setBook(Book book) {
+        this.book = book;
+    }
+
 }
