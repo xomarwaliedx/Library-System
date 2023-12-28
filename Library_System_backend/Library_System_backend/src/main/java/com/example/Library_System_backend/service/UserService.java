@@ -18,14 +18,6 @@ public class UserService {
   private final UserRepository userRepository;
 
   @Transactional
-  public List<UserDTO> test() {
-
-    List<User> output = userRepository.findAll();
-    System.err.println("Hello World");
-    return mapper.userListToUserDTOList(output);
-  }
-
-  @Transactional
   public UserDTO registerNewUser(UserDTO userDTO) {
     System.err.println(userDTO.toString());
     // Validate email format
