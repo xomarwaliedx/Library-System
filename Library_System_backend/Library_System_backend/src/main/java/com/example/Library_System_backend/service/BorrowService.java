@@ -8,8 +8,8 @@ import com.example.Library_System_backend.mapper.Mapper;
 import com.example.Library_System_backend.repository.BookRepository;
 import com.example.Library_System_backend.repository.BorrowRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -39,6 +39,7 @@ public class BorrowService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional
     public boolean borrowBook(BorrowDTO borrowDTO) {
         // Map the BorrowDTO to Borrow entity
         Borrow borrow = mapper.borrowDTOToBorrow(borrowDTO);
@@ -57,15 +58,14 @@ public class BorrowService {
             borrowRepository.save(borrow);
 
             // Notify the user
-            System.out.println("Book is reserved to you. Head to the library to pick it up.");
             return true;
         } else {
             // Book is not available
-            System.out.println("Book not available now.");
             return false;
         }
     }
 
+    @Transactional
     public boolean returnBook(BorrowDTO borrowDTO) {
         Integer id=borrowDTO.getId();
         Optional<Borrow> optionalBorrow = borrowRepository.findById(id);
@@ -82,11 +82,6 @@ public class BorrowService {
             long lateDays = currentDate.isAfter(returnDate) ? currentDate.toEpochDay() - returnDate.toEpochDay() : 0;
             double penalty = lateDays * 10; // $10 penalty per late day
 
-            // Display or use the penalty as needed
-            System.out.println("Return Date: " + returnDate);
-            System.out.println("Current Date: " + currentDate);
-            System.out.println("Penalty: $" + penalty);
-
             // Delete the Borrow record
             borrowRepository.deleteByIdIn(id);
             // Increment the count field in the associated book
@@ -98,8 +93,7 @@ public class BorrowService {
 
             return true;
         } else {
-            // Handle the case where the Borrow record with the given ID is not found
-            System.out.println("Borrow record not found with ID: " + id);
+
             return false;
         }
     }
