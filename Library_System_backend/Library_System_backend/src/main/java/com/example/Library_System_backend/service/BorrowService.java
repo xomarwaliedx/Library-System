@@ -23,10 +23,9 @@ public class BorrowService {
     private final Mapper mapper;
 
     private final BorrowRepository borrowRepository;
+
     private final BookRepository bookRepository;
 
-    @Autowired
-    UserService userService;
     public List<BorrowDTO> getAllBorrowedBooks() {
         List<Borrow> borrowedBooks = borrowRepository.findAll();
         return borrowedBooks.stream()
