@@ -89,7 +89,7 @@ export default {
         console.log(response.data);
 
         // Redirect to /login after a successful registration
-        // this.$router.push("/login");
+        this.$router.push("/admin");
       } catch (error) {
         // Handle errors (e.g., show error message)
         console.error("Error submitting form:", error);

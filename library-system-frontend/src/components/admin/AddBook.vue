@@ -100,6 +100,7 @@ export default {
         .post("http://localhost:8080/api/admin/books/addBook", this.formData)
         .then((response) => {
           console.log("Form submitted!", response.data);
+          this.$router.push("/admin");
           // Handle success response here
         })
         .catch((error) => {
