@@ -1,5 +1,6 @@
 package com.example.Library_System_backend.controller;
 
+import com.example.Library_System_backend.dto.BookDTO;
 import com.example.Library_System_backend.dto.UserDTO;
 import com.example.Library_System_backend.service.UserService;
 import org.slf4j.Logger;
@@ -49,6 +50,12 @@ public class UserController {
       return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
               .body("Unexpected error during user login: " + e.getMessage());
     }
+  }
+
+  @GetMapping("/admin/getAllUsers")
+  public ResponseEntity<List<UserDTO>> getAllBooks() {
+    List<UserDTO> allUsers = userService.getAllUsers();
+    return ResponseEntity.ok(allUsers);
   }
 
 }
