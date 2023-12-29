@@ -58,11 +58,18 @@ export default {
             isAdmin: this.userType === "Librarian",
           }
         );
-        localStorage.setItem("userId", response.data.id);
+        // localStorage.setItem("userId", response.data.id);
+        // localStorage.setItem("isAdmin", response.data.isAdmin === "Librarian");
+
+        await Promise.all([
+          localStorage.setItem("userId", response.data.id),
+          localStorage.setItem(
+            "isAdmin",
+            response.data.isAdmin
+          ),
+        ]);
 
         this.loginError = null;
-        console.log("response.data", response.data);
-        console.log('response.data.isAdmin', response.data.isAdmin);
         if (response.data.isAdmin) {
           this.$router.push({
             name: "admin",
