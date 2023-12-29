@@ -12,14 +12,7 @@
         <v-btn text class="white-text">Login</v-btn>
       </router-link>
 
-      <router-link
-        to="/admin"
-        v-if="
-          (
-            $route.path.includes('/admin')
-          )
-        "
-      >
+      <router-link to="/admin" v-if="$route.path.includes('/admin')">
         <v-btn text class="white-text">Home</v-btn>
       </router-link>
 
@@ -77,16 +70,40 @@ export default {
   methods: {
     logoutUser() {
       localStorage.setItem("userId", null);
+      localStorage.setItem("isAdmin", null);
       this.$router.push("/login");
     },
     goBack() {
       this.$router.go(-1);
     },
+    onRender() {
+      console.error("hi");
+      if (
+        !(
+          this.$route.path.includes("/register") ||
+          this.$route.path.includes("/login") ||
+          this.$route.path.includes("/aboutlibrary")
+        )
+      ) {
+        const userId = localStorage.getItem("userId");
+        if (userId === "null") {
+          this.$router.push("/login");
+        } else {
+          const isAdmin = localStorage.getItem("isAdmin") === "true";
+          if (isAdmin !== true && this.$route.path.includes("/admin")) {
+            this.$router.push("/mybooks");
+          } else if(isAdmin !== false && this.$route.path.includes("/user")){
+            this.$router.push("/admin");
+          }
+        }
+      }
+    },
   },
-
-  // components: {
-  //   LoginForm
-  // }
+  watch: {
+    $route() {
+      this.onRender();
+    },
+  },
 };
 </script>
 
