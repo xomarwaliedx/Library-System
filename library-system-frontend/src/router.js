@@ -74,7 +74,6 @@ const router = createRouter({ history: createWebHistory(), routes })
 router.beforeEach(async (to, from, next) => {
     const isAuthenticated = await new Promise((resolve) => {
         const userId = localStorage.getItem('userId');
-        console.error(localStorage.getItem('userId'))
         resolve(!!userId); // Resolve with a boolean indicating whether userId exists
     });
 
