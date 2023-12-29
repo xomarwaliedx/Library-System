@@ -9,6 +9,7 @@ import AddBook from './components/admin/AddBook'
 import BorrowedBooks from './components/admin/BorrowedBooks'
 import ViewAllBooks from './components/admin/ViewAllBooks'
 import AdminHomePage from './components/admin/AdminHomePage'
+import viewallusers from './components/admin/ViewAllUsers'
 import AboutLibrary from './components/AboutLibrary'
 
 
@@ -65,6 +66,11 @@ const routes = [
         path: '/admin/viewallbooks',
         name: 'viewallbooks',
         component: ViewAllBooks
+    },
+    {
+        path: '/admin/viewallusers',
+        name: 'viewallusers',
+        component: viewallusers
     }
     
 ]
