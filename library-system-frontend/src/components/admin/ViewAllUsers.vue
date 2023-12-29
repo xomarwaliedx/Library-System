@@ -17,9 +17,6 @@
             <td>{{ item.phone }}</td>
             <td>{{ item.fullName }}</td>
             <td>{{ item.isAdmin?"Librarian":"User" }}</td>
-            <td>
-  
-            </td>
           </tr>
         </template>
        
