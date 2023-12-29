@@ -1,0 +1,52 @@
+version: '3.8'
+services:
+  libraryDatabase:
+    platform: linux/amd64
+    hostname: libraryDatabase
+    image: mysql:8
+    restart: always
+    networks:
+      - library
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: library_system
+    ports:
+      - "3307:3306"
+
+  backend:
+    image: maven:3.9.6-amazoncorretto-17
+    hostname: backend
+    networks:
+      - library
+    build:
+      context: .
+    working_dir: /app/Library_System_backend
+    command: >
+      sh -c "rm -rf target && mvn dependency:go-offline -B && mvn clean package -T 4 && java -jar target/backend-0.0.1-SNAPSHOT.jar"
+    volumes:
+      - ./Library_System_backend/Library_System_backend:/app/Library_System_backend
+    depends_on:
+      - libraryDatabase
+    ports:
+      - "8080:8080"
+
+  frontend:
+    image: node:20
+    hostname: frontend
+    build:
+      context: .
+    networks:
+      - library
+    working_dir: /app/library-system-frontend
+    command: >
+      sh -c "npm install && npm run serve "
+    ports:
+      - "80:8080"
+    volumes:
+      - .:/app
+    depends_on:
+      - backend
+networks:
+  library:
+    driver: bridge
+
