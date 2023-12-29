@@ -42,20 +42,6 @@ class LibrarySystemBackendApplicationTests {
 	void contextLoads() {
 	}
 
-	@Test
-	public void testTestUsers() {
-		List<UserDTO> expectedUserDTO = new ArrayList<>(); // Initializing an ArrayList
-		expectedUserDTO.add(new UserDTO("email", "1234", "fullName", "password", true));
-
-		when(userService.test()).thenReturn(expectedUserDTO);
-
-		ResponseEntity<List<UserDTO>> responseEntity = userController.testUsers();
-
-		assertEquals(expectedUserDTO, responseEntity.getBody());
-		assertEquals(200, responseEntity.getStatusCodeValue());
-
-		verify(userService, times(1)).test();
-	}
 
 	@Test
 	public void testAddBookEndpoint() {

@@ -19,24 +19,14 @@ public class UserController {
   @Autowired
   private UserService userService;
 
-  private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
-
-  @GetMapping("/user/users")
-  public ResponseEntity<List<UserDTO>> testUsers() {
-    List<UserDTO> userDTO = userService.test();
-    return ResponseEntity.ok(userDTO);
-  }
-
   @PostMapping("/register")
   public ResponseEntity<String> registerUser(@RequestBody UserDTO userDTO) {
     try {
       UserDTO registeredUser = userService.registerNewUser(userDTO);
       return ResponseEntity.status(HttpStatus.CREATED).body("User registered successfully");
     } catch (IllegalArgumentException e) {
-      LOGGER.warn("Bad request during user registration: {}", e.getMessage());
       return ResponseEntity.badRequest().body(e.getMessage());
     } catch (Exception e) {
-      LOGGER.error("Unexpected error during user registration", e);
       return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
               .body("Unexpected error during user registration: " + e.getMessage());
     }
@@ -53,11 +43,9 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid email or password");
       } else {
         // Handle other bad requests
-        LOGGER.warn("Bad request during user login: {}", e.getMessage());
         return ResponseEntity.badRequest().body(e.getMessage());
       }
     } catch (Exception e) {
-      LOGGER.error("Unexpected error during user login", e);
       return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
               .body("Unexpected error during user login: " + e.getMessage());
     }

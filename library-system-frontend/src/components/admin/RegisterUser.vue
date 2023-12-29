@@ -74,7 +74,7 @@ export default {
   methods: {
     async submitForm() {
       try {
-        const response = await axios.post(
+        await axios.post(
           "http://localhost:8080/api/register",
           {
             email: this.email,
@@ -86,10 +86,9 @@ export default {
         );
 
         // Handle the response as needed (e.g., show success message)
-        console.log(response.data);
 
         // Redirect to /login after a successful registration
-        // this.$router.push("/login");
+        this.$router.push("/admin");
       } catch (error) {
         // Handle errors (e.g., show error message)
         console.error("Error submitting form:", error);

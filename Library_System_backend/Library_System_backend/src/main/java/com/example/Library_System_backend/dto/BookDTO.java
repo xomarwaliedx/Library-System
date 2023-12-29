@@ -19,8 +19,8 @@ public class BookDTO extends HasLongIdDTO {
 
   private String language;
 
-  private int publicationYear;
+  private Integer publicationYear;
 
-  private int count;
+  private Integer count;
 
 }

@@ -27,20 +27,4 @@ public class Borrow extends HasIntId {
     @JoinColumn(name = "book_id")
     private Book book;
 
-    public void setBorrowDate(LocalDate borrowDate) {
-        this.borrowDate = borrowDate;
-    }
-
-    public void setDuration(Integer duration) {
-        this.duration = duration;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public void setBook(Book book) {
-        this.book = book;
-    }
-
 }
