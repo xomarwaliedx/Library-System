@@ -7,6 +7,7 @@ import BrowseBooks from './components/user/BrowseBooks'
 import RegisterByAdmin from './components/admin/RegisterUser'
 import AddBook from './components/admin/AddBook'
 import BorrowedBooks from './components/admin/BorrowedBooks'
+import ViewAllBooks from './components/admin/ViewAllBooks'
 import AdminHomePage from './components/admin/AdminHomePage'
 import AboutLibrary from './components/AboutLibrary'
 
@@ -59,6 +60,11 @@ const routes = [
         path: '/admin',
         name: 'admin',
         component: AdminHomePage
+    },
+    {
+        path: '/admin/viewallbooks',
+        name: 'viewallbooks',
+        component: ViewAllBooks
     }
     
 ]
