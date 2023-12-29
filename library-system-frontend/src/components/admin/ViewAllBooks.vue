@@ -20,9 +20,6 @@
           <td>{{ item.publicationYear }}</td>
           <td>{{ item.count }}</td>
           <td>{{ item.reserved }}</td>
-          <td>
-
-          </td>
         </tr>
       </template>
      
