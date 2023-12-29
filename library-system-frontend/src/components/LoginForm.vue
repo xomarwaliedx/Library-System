@@ -83,7 +83,6 @@ export default {
         this.loginError = error.response
           ? error.response.data
           : "Login failed. Please try again.";
-        console.error("Login failed:", this.loginError);
       }
     },
   },

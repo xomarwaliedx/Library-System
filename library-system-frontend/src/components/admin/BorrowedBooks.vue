@@ -35,9 +35,9 @@
     data: () => ({
       itemsPerPage: 5,
       headers: [
-        { title: 'Book Name', align: 'start', sortable: false, key: 'bookName' },
-        { title: 'Borrow Date', key: 'borrowDate', align: 'end' },
-        { title: 'Return Date', key: 'returnDate', align: 'end' },
+        { title: 'Book Name', align: 'center', sortable: false, key: 'bookName' },
+        { title: 'Borrow Date', key: 'borrowDate', align: 'center' },
+        { title: 'Return Date', key: 'returnDate', align: 'center' },
       ],
       items: [],
       loading: true,

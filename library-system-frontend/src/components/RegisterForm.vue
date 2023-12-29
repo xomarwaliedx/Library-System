@@ -82,7 +82,6 @@
           this.$router.push('/login'); 
         } catch (error) {
           // Handle errors (e.g., show error message)
-          console.error('Error submitting form:', error);
   
           // Update the errorMessage property to display to the user
           this.errorMessage = error.response ? error.response.data : 'An unexpected error occurred';

@@ -1,6 +1,8 @@
 package com.example.Library_System_backend.service;
 
+import com.example.Library_System_backend.dto.BookDTO;
 import com.example.Library_System_backend.dto.UserDTO;
+import com.example.Library_System_backend.entity.Book;
 import com.example.Library_System_backend.entity.User;
 import com.example.Library_System_backend.mapper.Mapper;
 import com.example.Library_System_backend.repository.UserRepository;
@@ -9,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -52,4 +55,10 @@ public class UserService {
 
     return mapper.userToUserDTO(user);
   }
+
+  public List<UserDTO> getAllUsers() {
+    List<User> users = userRepository.findAll();
+    return mapper.userListToUserDTOList(users);
+  }
 }
+

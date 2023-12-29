@@ -77,7 +77,6 @@ export default {
       this.$router.go(-1);
     },
     onRender() {
-      console.error("hi");
       if (
         !(
           this.$route.path.includes("/register") ||

@@ -38,12 +38,12 @@
     data: () => ({
       search: "",
       headers: [
-        { title: "Book Name", align: "end", key: "bookName" },
-        { title: "Author", align: "end", key: "author" },
-        { title: "Genre", align: "end", key: "genre" },
-        { title: "Language", align: "end", key: "language" },
-        { title: "Publication Year", align: "end", key: "publicationYear" },
-        { title: "Number of available copies", align: "end", key: "count" },
+        { title: "Book Name", align: "center", key: "bookName" },
+        { title: "Author", align: "center", key: "author" },
+        { title: "Genre", align: "center", key: "genre" },
+        { title: "Language", align: "center", key: "language" },
+        { title: "Publication Year", align: "center", key: "publicationYear" },
+        { title: "Number of available copies", align: "center", key: "count" },
       ],
       items: [],
       reserveDialog: false,
@@ -58,7 +58,7 @@
   
     computed: {
       headersWithButton() {
-        return [...this.headers, { title: "", align: "end", key: "actions" }];
+        return [...this.headers];
       },
   
       filteredItems() {
@@ -100,22 +100,6 @@
   
         return false;
       },
-  
-      openReserveDialog(book) {
-        this.selectedBook = book;
-        this.duration = null; // Reset the duration input
-        this.reserveDialog = true;
-      },
-  
-      closeReserveDialog() {
-        this.reserveDialog = false;
-        this.duration = null; // Reset the duration input
-      },
-
-      goToMyBooks() {
-      // Assuming you have a named route for "browsebooks"
-      this.$router.push({ name: 'mybooks' });
-    },
   
     },
   
