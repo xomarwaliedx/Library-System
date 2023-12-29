@@ -41,6 +41,7 @@ export default {
         { text: "Add Book", path: "/admin/addbook" },
         { text: "Borrowed Books", path: "/admin/borrowedbooks" },
         { text: "Register User", path: "/admin/reguser" },
+        { text: "View All Books", path: "/admin/viewallbooks" },
       ],
     };
   },
