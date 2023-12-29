@@ -53,8 +53,7 @@
           });
 
 
-          // Handle the response if needed
-          console.log('Book returned successfully:', response.data);
+
 
           // You may want to reload the data after returning the book
           this.loadItems({ page: 1, itemsPerPage: this.itemsPerPage, sortBy: [] });

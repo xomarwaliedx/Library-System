@@ -74,10 +74,11 @@ const router = createRouter({ history: createWebHistory(), routes })
 router.beforeEach(async (to, from, next) => {
     const isAuthenticated = await new Promise((resolve) => {
         const userId = localStorage.getItem('userId');
+        console.error(localStorage.getItem('userId'))
         resolve(!!userId); // Resolve with a boolean indicating whether userId exists
     });
 
-    if (!isAuthenticated && (to.name !== 'login' && to.name !== 'register'  && to.name !== 'aboutlibrary')) {
+    if (isAuthenticated==null && (to.name !== 'login' && to.name !== 'register'  && to.name !== 'aboutlibrary')) {
         next('/login');
     } else {
         next();

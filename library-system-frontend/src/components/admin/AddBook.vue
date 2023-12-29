@@ -94,7 +94,6 @@ export default {
       return "Year must be between 1800 and " + currentYear;
     },
     submitForm() {
-      console.log("Form submitted!", this.formData);
       // Send form data using Axios
       axios
         .post("http://localhost:8080/api/admin/books/addBook", this.formData)
