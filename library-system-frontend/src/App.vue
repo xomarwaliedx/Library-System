@@ -12,7 +12,7 @@
         <v-btn text class="white-text">Login</v-btn>
       </router-link>
 
-      <router-link to="/admin" v-if="$route.path.includes('/admin')">
+      <router-link v-if="$route.path.includes('/admin') && $route.path !== '/admin'" to="/admin">
         <v-btn text class="white-text">Home</v-btn>
       </router-link>
 
@@ -84,6 +84,11 @@ export default {
           this.$route.path.includes("/aboutlibrary")
         )
       ) {
+        if (
+          window.location.pathname==="/"
+        ) {
+          this.$router.push("/register");
+        }
         const userId = localStorage.getItem("userId");
         if (userId === "null") {
           this.$router.push("/login");
